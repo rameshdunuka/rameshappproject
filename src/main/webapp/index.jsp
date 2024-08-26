@@ -1,63 +1,34 @@
-<?php
-if (isset($_POST['submit'])) {
-    if (isset($_POST['username']) && isset($_POST['password']) &&
-        isset($_POST['gender']) && isset($_POST['email']) &&
-        isset($_POST['phoneCode']) && isset($_POST['phone'])) {
-       
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $gender = $_POST['gender'];
-        $email = $_POST['email'];
-        $phoneCode = $_POST['phoneCode'];
-        $phone = $_POST['phone'];
-
-        $host = "localhost";
-        $dbUsername = "root";
-        $dbPassword = "";
-        $dbName = "test";
-
-        $conn = new mysqli($host, $dbUsername, $dbPassword, $dbName);
-
-        if ($conn->connect_error) {
-            die('Could not connect to the database.');
-        }
-        else {
-            $Select = "SELECT email FROM register WHERE email = ? LIMIT 1";
-            $Insert = "INSERT INTO register(username, password, gender, email, phoneCode, phone) values(?, ?, ?, ?, ?, ?)";
-
-            $stmt = $conn->prepare($Select);
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
-            $stmt->bind_result($resultEmail);
-            $stmt->store_result();
-            $stmt->fetch();
-            $rnum = $stmt->num_rows;
-
-            if ($rnum == 0) {
-                $stmt->close();
-
-                $stmt = $conn->prepare($Insert);
-                $stmt->bind_param("ssssii",$username, $password, $gender, $email, $phoneCode, $phone);
-                if ($stmt->execute()) {
-                    echo "New record inserted sucessfully.";
-                }
-                else {
-                    echo $stmt->error;
-                }
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Welcome to Ramesh world</title>
+        <style>
+            body {
+                background-image: url('https://www.google.com/imgres?q=office%20room%20background&imgurl=https%3A%2F%2Fi.etsystatic.com%2F42469888%2Fr%2Fil%2F4c4960%2F4801355472%2Fil_570xN.4801355472_tnlr.jpg&imgrefurl=https%3A%2F%2Fwww.etsy.com%2Fin-en%2Flisting%2F1443302126%2Fminimalist-home-zoom-backdrop-zoom&docid=qYHv4OCiEya05M&tbnid=BGjCto1aaVIj1M&vet=12ahUKEwjEraHf-ZGIAxX6xTgGHTb_FtMQM3oECC8QAA..i&w=570&h=380&hcb=2&ved=2ahUKEwjEraHf-ZGIAxX6xTgGHTb_FtMQM3oECC8QAA');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                font-family: Arial, sans-serif;
+                color: #ffffff;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
-            else {
-                echo "Someone already registers using this email.";
+
+            h1 {
+                background-color: rgba(0, 0, 0, 0.5);
+                padding: 20px;
+                border-radius: 10px;
             }
-            $stmt->close();
-            $conn->close();
-        }
-    }
-    else {
-        echo "All field are required.";
-        die();
-    }
-}
-else {
-    echo "Submit button is not set";
-}
-?>
+        </style>
+    </head>
+    <body>
+        <h1>Welcome to Praveen's DevOps Class</h1>
+    </body>
+</html>
