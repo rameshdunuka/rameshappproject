@@ -29,6 +29,6 @@
         </style>
     </head>
     <body>
-        <h1>Welcome to Praveen's DevOps Class</h1>
+        <h1>Welcome to Ramesh world</h1>
     </body>
 </html>
